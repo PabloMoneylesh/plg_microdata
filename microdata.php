@@ -39,7 +39,17 @@ class PlgContentmicrodata extends JPlugin {
 
 		$siteName=$config->get('sitename');
 		$title=$article->title;
-		$description=$article->metadesc;		
+		$description=$article->metadesc;	
+
+		$rating = (int) $article->rating;				
+		$ratingCount = (int) $article->rating_count;
+		if($ratingCount == 0 && $rating == 0){
+			$ratingCount = 1;
+			$rating = 5;
+		}
+
+		$organizationName = "QA42.ru";
+		$logoURL = "http://qa42.ru/images/headers/header.png";
 		//var_dump($article);		
 		
 		$artRoute = ContentHelperRoute::getArticleRoute($article->id, $article->catid);		
@@ -87,14 +97,16 @@ class PlgContentmicrodata extends JPlugin {
 		$json_ld .='"headline": "'.$title.'",';
 		$json_ld .='"alternativeHeadline": "'. $description. '",';
 		$json_ld .='"mainEntityOfPage": {"@type": "WebPage","@id": "'.$canonicalLink.'"},';
-		$json_ld .='"publisher": {"@type": "Organization", "name": "QA42.ru", "logo": {"@type": "ImageObject","url": "http://qa42.ru/images/headers/header.png"}},';
+		$json_ld .='"publisher": {"@type": "Organization", "name": "'.$organizationName.'", "logo": {"@type": "ImageObject","url": "'.$logoURL.'"}},';
 		
 		$json_ld .='"datePublished": "'.$article->created.'",';
 		$json_ld .='"dateModified": "'.$article->modified.'",';
 		$json_ld .='"author": "'. $article->author. '",';		
 		$json_ld .='"description": "'. $description. '",';		
 		$json_ld .='"url": "'. $canonicalLink. '",';
-		$json_ld .='"isAccessibleForFree":true';
+		$json_ld .='"isAccessibleForFree":true, ';
+		
+		$json_ld .='"aggregateRating": {"@type": "AggregateRating", "ratingValue": "'. $rating .'", "ratingCount": "'. $ratingCount .'" }';
 		
 		if(isset($imageurl)){
 			$json_ld .=', "image":"'. $imageurl .'"';

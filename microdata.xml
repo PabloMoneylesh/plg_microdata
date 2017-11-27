@@ -6,7 +6,7 @@
 	<copyright>Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>pablomoneylesh@gmail.com</authorEmail>	
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>Places micridata in to page head section</description>
 	<files>
 		<filename plugin="microdata">microdata.php</filename>		
