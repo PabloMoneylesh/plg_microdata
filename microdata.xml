@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+	<name>Microdata Injector</name>
+	<author>PabloMoneylesh</author>
+	<creationDate>2017-11-06</creationDate>
+	<copyright>Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>pablomoneylesh@gmail.com</authorEmail>	
+	<version>1.0.0</version>
+	<description>Places micridata in to page head section</description>
+	<files>
+		<filename plugin="microdata">microdata.php</filename>		
+	</files>
+
+	<config>		
+	</config>	
+</extension>
