@@ -39,7 +39,7 @@ class PlgContentmicrodata extends JPlugin {
 
 		$siteName=$config->get('sitename');
 		$title=$article->title;
-		$description=$article->metadesc;	
+		$description=str_replace(array("\n", "\r"), ' ', htmlspecialchars($article->metadesc));		
 
 		$rating = (int) $article->rating;				
 		$ratingCount = (int) $article->rating_count;
