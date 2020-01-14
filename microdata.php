@@ -37,9 +37,9 @@ class PlgContentmicrodata extends JPlugin {
 		$document =  JFactory::getDocument();
 		$config = JFactory::getConfig();		
 
-		$siteName=$config->get('sitename');
-		$title=$article->title;
-		$description=str_replace(array("\n", "\r"), ' ', htmlspecialchars($article->metadesc));		
+		$siteName=$config->get('sitename');		
+		$title=str_replace(array("\n", "\r", "\\"), ' ', htmlspecialchars($article->title));		
+		$description=str_replace(array("\n", "\r", "\\"), ' ', htmlspecialchars($article->metadesc));		
 
 		$rating = (int) $article->rating;				
 		$ratingCount = (int) $article->rating_count;
@@ -64,6 +64,10 @@ class PlgContentmicrodata extends JPlugin {
 		if(isset($introImage) && $introImage !="" ){
 			$imageurl = JURI::base() . $introImage;
 		}
+		if(!isset($imageurl)){
+			$imageurl = $logoURL;
+		}
+
 				
 
 		$document->addCustomTag('<meta property="og:title" content="'.$title.'"/>');
