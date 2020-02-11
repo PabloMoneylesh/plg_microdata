@@ -48,8 +48,8 @@ class PlgContentmicrodata extends JPlugin {
 			$rating = 5;
 		}
 
-		$organizationName = "QA42.ru";
-		$logoURL = "http://qa42.ru/images/headers/header.png";
+		$organizationName = $this->params->get('organizationName');
+		$logoURL = $this->params->get('logoURL');
 		//var_dump($article);		
 		
 		$artRoute = ContentHelperRoute::getArticleRoute($article->id, $article->catid);		
@@ -67,8 +67,6 @@ class PlgContentmicrodata extends JPlugin {
 		if(!isset($imageurl)){
 			$imageurl = $logoURL;
 		}
-
-				
 
 		$document->addCustomTag('<meta property="og:title" content="'.$title.'"/>');
 		$document->addCustomTag('<meta property="og:description" content="'.$description.'"/>');
@@ -95,25 +93,25 @@ class PlgContentmicrodata extends JPlugin {
 				$document->addCustomTag('<meta name="twitter:image:alt" content="'.$title.'">');
 			}
 
-		$json_ld = '<script type="application/ld+json"> {';
-		$json_ld .='"@context": "http://schema.org/",';
-		$json_ld .='"@type": "Article",';
-		$json_ld .='"headline": "'.$title.'",';
-		$json_ld .='"alternativeHeadline": "'. $description. '",';
-		$json_ld .='"mainEntityOfPage": {"@type": "WebPage","@id": "'.$canonicalLink.'"},';
-		$json_ld .='"publisher": {"@type": "Organization", "name": "'.$organizationName.'", "logo": {"@type": "ImageObject","url": "'.$logoURL.'"}},';
+		$json_ld = '<script type="application/ld+json"> {'. PHP_EOL;
+		$json_ld .='"@context": "http://schema.org/",'. PHP_EOL;
+		$json_ld .='"@type": "Article",'. PHP_EOL;
+		$json_ld .='"headline": "'.$title.'",'. PHP_EOL;
+		$json_ld .='"alternativeHeadline": "'. $description. '",'. PHP_EOL;
+		$json_ld .='"mainEntityOfPage": {"@type": "WebPage","@id": "'.$canonicalLink.'"},'. PHP_EOL;
+		$json_ld .='"publisher": {"@type": "Organization", "name": "'.$organizationName.'", "logo": {"@type": "ImageObject","url": "'.$logoURL.'"}},'. PHP_EOL;
 		
-		$json_ld .='"datePublished": "'.$article->created.'",';
-		$json_ld .='"dateModified": "'.$article->modified.'",';
-		$json_ld .='"author": "'. $article->author. '",';		
-		$json_ld .='"description": "'. $description. '",';		
-		$json_ld .='"url": "'. $canonicalLink. '",';
-		$json_ld .='"isAccessibleForFree":true, ';
+		$json_ld .='"datePublished": "'.$article->created.'",'. PHP_EOL;
+		$json_ld .='"dateModified": "'.$article->modified.'",'. PHP_EOL;
+		$json_ld .='"author": "'. $article->author. '",'. PHP_EOL;
+		$json_ld .='"description": "'. $description. '",'. PHP_EOL;
+		$json_ld .='"url": "'. $canonicalLink. '",'. PHP_EOL;
+		$json_ld .='"isAccessibleForFree":true, '. PHP_EOL;
 		
-		$json_ld .='"aggregateRating": {"@type": "AggregateRating", "ratingValue": "'. $rating .'", "ratingCount": "'. $ratingCount .'" }';
+		//$json_ld .='"aggregateRating": {"@type": "AggregateRating", "ratingValue": "'. $rating .'", "ratingCount": "'. $ratingCount .'" },';
 		
 		if(isset($imageurl)){
-			$json_ld .=', "image":"'. $imageurl .'"';
+			$json_ld .='"image":"'. $imageurl .'"'. PHP_EOL;
 		}	
 		$json_ld .= '}</script>';
 

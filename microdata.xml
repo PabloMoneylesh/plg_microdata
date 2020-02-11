@@ -12,6 +12,25 @@
 		<filename plugin="microdata">microdata.php</filename>		
 	</files>
 
-	<config>		
+	
+<config>
+		<fields name="params">
+ 
+			<fieldset name="basic">			
+				
+				<field name="logoURL" type="text"
+					default=""
+					description="URL of the logo image"
+					label="URL of the logo image">
+				</field> 
+				<field name="organizationName" type="text"
+					default=""
+					description="Organization Name"
+					label="Organization Name">
+				</field> 				
+				
+			</fieldset>	 
+ 
+		</fields>
 	</config>	
 </extension>
