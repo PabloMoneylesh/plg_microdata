@@ -53,7 +53,7 @@ class PlgContentmicrodata extends JPlugin {
 		//var_dump($article);		
 		
 		$artRoute = ContentHelperRoute::getArticleRoute($article->id, $article->catid);		
-		$canonicalLink = JRoute::_($artRoute);
+		$canonicalLink = JURI::base() . JRoute::_($artRoute);
 				
 		$document->addCustomTag('<link href="'.$canonicalLink.'" rel="canonical">');
 
