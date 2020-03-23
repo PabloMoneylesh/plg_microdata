@@ -57,12 +57,12 @@ class PlgContentmicrodata extends JPlugin {
 				
 		$document->addCustomTag('<link href="'.$canonicalLink.'" rel="canonical">');
 
-		if(isset(json_decode($article->images)->image_intro)){
-			$introImage = json_decode($article->images)->image_intro;
+		if(isset(json_decode($article->images)->image_fulltext)){
+			$fullTextImage = json_decode($article->images)->image_fulltext;
 		}
 		
-		if(isset($introImage) && $introImage !="" ){
-			$imageurl = JURI::base() . $introImage;
+		if(isset($fullTextImage) && $fullTextImage !="" ){
+			$imageurl = JURI::base() . $fullTextImage;
 		}
 		if(!isset($imageurl)){
 			$imageurl = $logoURL;
