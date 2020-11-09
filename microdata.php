@@ -93,27 +93,29 @@ class PlgContentmicrodata extends JPlugin {
 				$document->addCustomTag('<meta name="twitter:image:alt" content="'.$title.'">');
 			}
 
-		$json_ld = '<script type="application/ld+json"> {'. PHP_EOL;
-		$json_ld .='"@context": "http://schema.org/",'. PHP_EOL;
-		$json_ld .='"@type": "Article",'. PHP_EOL;
-		$json_ld .='"headline": "'.$title.'",'. PHP_EOL;
-		$json_ld .='"alternativeHeadline": "'. $description. '",'. PHP_EOL;
-		$json_ld .='"mainEntityOfPage": {"@type": "WebPage","@id": "'.$canonicalLink.'"},'. PHP_EOL;
-		$json_ld .='"publisher": {"@type": "Organization", "name": "'.$organizationName.'", "logo": {"@type": "ImageObject","url": "'.$logoURL.'"}},'. PHP_EOL;
-		
-		$json_ld .='"datePublished": "'.$article->created.'",'. PHP_EOL;
-		$json_ld .='"dateModified": "'.$article->modified.'",'. PHP_EOL;
-		$json_ld .='"author": "'. $article->author. '",'. PHP_EOL;
-		$json_ld .='"description": "'. $description. '",'. PHP_EOL;
-		$json_ld .='"url": "'. $canonicalLink. '",'. PHP_EOL;
-		$json_ld .='"isAccessibleForFree":true, '. PHP_EOL;
-		
-		//$json_ld .='"aggregateRating": {"@type": "AggregateRating", "ratingValue": "'. $rating .'", "ratingCount": "'. $ratingCount .'" },';
-		
-		if(isset($imageurl)){
-			$json_ld .='"image":"'. $imageurl .'"'. PHP_EOL;
-		}	
-		$json_ld .= '}</script>';
+		$json_ld = '<script type="application/ld+json"> [ {'. PHP_EOL;
+			$json_ld .='"@context": "http://schema.org/",'. PHP_EOL;
+			$json_ld .='"@type": "Article",'. PHP_EOL;
+			$json_ld .='"headline": "'.$title.'",'. PHP_EOL;
+			$json_ld .='"alternativeHeadline": "'. $description. '",'. PHP_EOL;
+			$json_ld .='"mainEntityOfPage": {"@type": "WebPage","@id": "'.$canonicalLink.'"},'. PHP_EOL;
+			$json_ld .='"publisher": {"@type": "Organization", "name": "'.$organizationName.'", "logo": {"@type": "ImageObject","url": "'.$logoURL.'"}},'. PHP_EOL;
+			
+			$json_ld .='"datePublished": "'.$article->created.'",'. PHP_EOL;
+			$json_ld .='"dateModified": "'.$article->modified.'",'. PHP_EOL;
+			$json_ld .='"author": "'. $article->author. '",'. PHP_EOL;
+			$json_ld .='"description": "'. $description. '",'. PHP_EOL;
+			$json_ld .='"url": "'. $canonicalLink. '",'. PHP_EOL;
+			$json_ld .='"isAccessibleForFree":true, '. PHP_EOL;
+			
+			if(isset($imageurl)){
+				$json_ld .='"image":"'. $imageurl .'"'. PHP_EOL;
+			}	
+		$json_ld .= '},'. PHP_EOL;
+		$json_ld .= '{"@context": "https://schema.org/","@type": "CreativeWorkSeries","name": "'.$title.'",'. PHP_EOL;
+			$json_ld .= '"aggregateRating": {"@type": "AggregateRating","ratingValue": "'. $rating .'","bestRating": "5","ratingCount": "'. $ratingCount .'"}'. PHP_EOL;
+		$json_ld .= '}'. PHP_EOL;
+		$json_ld .= ']</script>';
 
 		$document->addCustomTag($json_ld);
 
